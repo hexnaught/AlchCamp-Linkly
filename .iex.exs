@@ -3,13 +3,24 @@ import_if_available(Ecto.Changeset)
 
 alias Ecto.Adapters.SQL
 alias Linkly.Repo
-alias Linkly.{Bookmark, Link, LinkTags, Tags, User}
+alias Linkly.{Bookmark, Link, LinkTag, Tag, User}
 
 u = %Linkly.User{
   username: "test",
   email: "test@example.com",
   about: "This is a test user!"
 }
+
+l = %Link{url: "http://example.com" }
+
+b = %Linkly.Bookmark{
+  user_id: 1,
+  link_id: 1,
+  title: "Default website example.com"
+}
+
+# uu = Repo.get!(User, 1) |> Repo.preload([:bookmarked_links])
+
 
 defmodule MyCLI do
   IEx.configure(

@@ -1,6 +1,14 @@
 # Linkly
 
-**TODO: Add description**
+Backend to explore Elixir and Ecto, based on the tutorial playlist [by Alchemist Camp](https://www.youtube.com/playlist?list=PLFhQVxlaKQElscjMvMmyMCaZ9mxf4XAw-).
+
+Quick setup and run some example queries with seed data.
+
+```sh
+$ docker compose up -d
+$ mix ecto.drop ; mix ecto.create ; mix ecto.migrate
+$ mix run .example_queries.exs
+```
 
 ## Installation
 
@@ -49,7 +57,15 @@ iex> Enum.map(u.bookmarks, & {&1.link.url})
 
 iex> Repo.all(Link) |> Enum.map(& {Repo.preload(&1, [:bookmarks])})
 ```
+# Changesets
 
-## Continue:
+Two ways to create a changeset.
 
-https://www.youtube.com/watch?v=pwTf887Mk6s&list=PLFhQVxlaKQElscjMvMmyMCaZ9mxf4XAw-&index=9
+```elixir
+> Ecto.Changeset.change /1 /2
+> Ecto.Changeset.cast /2 /3
+```
+
+For internal data, use "change", for external data, use "cast".
+
+Commit the changes via `Repo.insert` or `Repo.update`.
